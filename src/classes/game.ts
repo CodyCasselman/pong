@@ -95,8 +95,9 @@ export class Game {
     requestAnimationFrame(this.update.bind(this));
   }
 
+  //UPDATE DOES TOO MUCH
   update() {
-    this.gameOver();
+    this.gameOver(); //LACK OF COMMENTS
     if (this.gameState === "gameOver") {
       showGameOverMessage(this.winner as Player);
       this.gameState = GameState.menu;
@@ -119,13 +120,16 @@ export class Game {
 
     requestAnimationFrame(this.update.bind(this));
   }
-
+  //UNCLEAR METHOD NAME AND FUNCTION
   gameOver() {
     if (
+      //STINKY
       this.player1.score === WINNING_SCORE ||
       this.player2.score === WINNING_SCORE
     ) {
+      
       this.gameState = GameState.gameOver;
+      //STINKY
       this.winner =
         this.player1.score > this.player2.score ? this.player1 : this.player2;
     }

@@ -11,7 +11,7 @@ const checkCollisions = async (ballAndPlayers: BallAndPlayers) => {
   let { ball, player1, player2 } = ballAndPlayers;
   // If the ball is on the left, player1 is the player, otherwise player2 is the player
   let player: Player = ball.x < canvas.width / 2 ? player1 : player2;
-
+  //EXCESSIVE COMMENTING
   if (isCollision({ ball, player })) {
     // Play a sound when the ball hits the paddle
     let audio = new Audio(await pongSound());
@@ -64,6 +64,7 @@ const isCollision = (ballAndPlayer: BallAndPlayer): boolean => {
   // Check if ball is between player edges and not in the corners
   // If ball is in the corners, it's not a collision
   // This is a little hacky, but it's a good start
+  //WAYYYY TOO BIG OF A BOOLEAN
   return (
     isBallRightEdgePastPlayerLeftEdge &&
     isBallLeftEdgePastPlayerRightEdge &&

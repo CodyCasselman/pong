@@ -25,7 +25,7 @@ document.addEventListener("click", function (_event: Event) {
   // Start a new game loop
   game.newGame();
 });
-
+//UNCLEAR METHODS
 // Add event listeners for paddle movement
 document.addEventListener("keydown", function (event: KeyboardEvent) {
   if (event.code === "KeyW") {

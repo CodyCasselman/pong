@@ -1,7 +1,7 @@
 import { Player } from "../classes/player";
 import { canvas, DEFAULT_COLOR, GAME_FONT_FAMILY } from "../constants";
 import { drawText, clearCanvas } from "./draw";
-
+//EXCESSIVE USE OF CONST
 const showNewGameMessage = (): void => {
   const text = "Press Space to start a new game or Esc to quit";
   const x = canvas.width / 2;

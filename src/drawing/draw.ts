@@ -7,6 +7,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const drawBorder = (): void => {
+  //MAGIC NUMBERS
   // Draw a border around the canvas
   let borderThickness = 5;
   let borderColor = "rgba(170, 170, 170, 1)";
@@ -74,7 +75,7 @@ const drawPaddles = (players: Players): void => {
     throw new Error("player2 paddle is missing");
   }
 };
-
+//EXCESSIVE AND REDUNDANT COMMENTS
 // Draw a ball on the screen
 const drawBall = (ball: Ball): void => {
   if (ball === null) {
@@ -151,6 +152,7 @@ const drawText = (draw: Draw): void => {
     isBold = false,
     hasShadow = false,
   } = draw;
+  //EXCESSIVE AND REDUNDANT COMMENTS
   // Check that the text is not empty.
   if (!text) {
     throw new Error("Text is empty.");
@@ -190,6 +192,7 @@ const clearCanvas = (): void => {
   }
   try {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //UNHANDLED ERROR
   } catch (e) {
     // We could do something with the error, but we are not interested in it
     // for now. This method is not critical, so we can just ignore it.
