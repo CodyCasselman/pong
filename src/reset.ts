@@ -1,7 +1,7 @@
 import { Ball } from "./classes/ball";
 import { BALL_SPEED, PADDLE_HEIGHT, canvas } from "./constants";
 import { PlayersAndWinner, Players } from "./types";
-
+//STINKY: CLASS DOESNT DO MUCH
 const resetScores = (playersAndWinner: PlayersAndWinner) => {
   // destructure the args
   let { player1, player2, winner } = playersAndWinner;

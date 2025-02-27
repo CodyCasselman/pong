@@ -8,7 +8,7 @@ export class Player {
   private _color: string;
   private _ai: boolean;
   private _velocityY!: number;
-
+  //long parameter list
   constructor(
     name: string,
     x: number,

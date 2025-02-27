@@ -69,7 +69,7 @@ export class Game {
     this.player2.ai = this.getAI();
     this.player2.name = this.getPlayer2Name();
   }
-
+  //DUPLICATE CODE ISH
   getPlayer2Name(): string {
     return this.players > 1 ? "Player 2" : "Computer";
   }
@@ -79,6 +79,7 @@ export class Game {
   }
 
   newGame() {
+    //STINKY: POINTLESS BOOLEAN
     if (
       this.gameState === GameState.menu ||
       this.gameState === GameState.gameOver

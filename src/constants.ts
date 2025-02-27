@@ -9,10 +9,10 @@ export const canvas: HTMLCanvasElement = document.getElementById(
 export const ctx: CanvasRenderingContext2D = canvas.getContext(
   "2d"
 ) as CanvasRenderingContext2D;
-
+//STINKY: MAGIC NUMBER + IS ALREADY HELD IN BALL.TS
 // Define the ball speed constant
 export const BALL_SPEED: number = 5; // You can set this value to whatever you want
-
+//STINKY: SHOULD BE AN OBJECT
 // Define the paddle height
 export const PADDLE_HEIGHT: number = canvas.height * 1.5;
 // Set the width of the paddles

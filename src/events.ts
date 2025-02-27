@@ -5,7 +5,7 @@ import { drawMenu, menuActions, menuCursorDown, menuCursorUp } from "./ui/menu";
 
 // destructuring the game instance
 const game = Game.getInstance();
-
+//STINKY: CLASS ALSO DIRECTLY HANDLES PLAYER MOVEMENTS
 document.addEventListener("mousemove", function (event: MouseEvent) {
   // Move player1 paddle
   game.player1.y = event.clientY - PADDLE_HEIGHT / 2;
@@ -25,7 +25,7 @@ document.addEventListener("click", function (_event: Event) {
   // Start a new game loop
   game.newGame();
 });
-//UNCLEAR METHODS
+//STINKY: UNCLEAR METHODS AND LONG METHOD
 // Add event listeners for paddle movement
 document.addEventListener("keydown", function (event: KeyboardEvent) {
   if (event.code === "KeyW") {
