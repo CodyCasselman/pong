@@ -66,7 +66,7 @@ export class Game {
 
   setPlayers(players: number) {
     this.players = players;
-    this.player2.ai = this.getAI();
+    this.player2.ai = this.getAI(); //STINKY: No need for a method call here
     this.player2.name = this.getPlayer2Name();
   }
   //DUPLICATE CODE ISH
@@ -105,7 +105,7 @@ export class Game {
       return; // Exit the game loop if the game is over
     }
     clearCanvas();
-    drawElements({
+    drawElements({ //STINKY: TOO MANY PARAMETERS. CAN BE TURNED INTO OBJECTS
       ball: this.ball,
       player1: this.player1,
       player2: this.player2,

@@ -21,7 +21,7 @@ export class Ball {
     this._velocityY = velocityY;
     this._speed = speed;
     this._color = color;
-    this._radius = 10;
+    this._radius = 10; //MAGIC NUMBER
   }
 
   // Getters and setters

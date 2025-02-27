@@ -7,7 +7,6 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const drawBorder = (): void => {
-  //MAGIC NUMBERS
   // Draw a border around the canvas
   let borderThickness = 5;
   let borderColor = "rgba(170, 170, 170, 1)";
@@ -19,7 +18,7 @@ const drawBorder = (): void => {
 //draws the net
 const drawNet = (): void => {
   //net width
-  const width = 10;
+  const width = 10;//STINKY: MAGIC NUMBERS
   //net height
   const height = 15;
   //net x coordinate
@@ -40,10 +39,9 @@ const drawNet = (): void => {
 const drawPaddles = (players: Players): void => {
   // destructure the args
   let { player1, player2 } = players;
-
   // draw player1 paddle
-  if (player1) {
-    if (player1.width && player1.height && player1.color) {
+  if (player1) { //STINKY: Unnescesary nested conditional
+    if (player1.width && player1.height && player1.color) { //STINKY: too many conditions. Can be split
       drawRect({
         x: player1.x,
         y: player1.y,
@@ -51,13 +49,13 @@ const drawPaddles = (players: Players): void => {
         height: player1.height,
         color: player1.color,
       });
-    } else {
+    } else { //STINKY: bad error message
       throw new Error("player1 paddle is missing a required property");
     }
   } else {
     throw new Error("player1 paddle is missing");
   }
-
+  //STINKY: repeat code, long method
   // draw player2 paddle
   if (player2) {
     if (player2.width && player2.height && player2.color) {
@@ -75,9 +73,9 @@ const drawPaddles = (players: Players): void => {
     throw new Error("player2 paddle is missing");
   }
 };
-//EXCESSIVE AND REDUNDANT COMMENTS
+//STINKY: EXCESSIVE AND REDUNDANT COMMENTS
 // Draw a ball on the screen
-const drawBall = (ball: Ball): void => {
+const drawBall = (ball: Ball): void => { //STINKY: pointless method
   if (ball === null) {
     return; // If the ball is null, stop drawing it
   }
@@ -182,7 +180,7 @@ const drawText = (draw: Draw): void => {
   // Draw the text.
   ctx.fillText(text, x, y);
 };
-
+//SMELLY: UNDONE CODE
 const clearCanvas = (): void => {
   // Remove everything from the canvas
   // If the canvas is not initialized properly or the context is not good,
