@@ -1,8 +1,10 @@
+//STINKY: INCONSISTENT VARIABLE NAMING
 // Get the canvas element from the HTML file
 export const canvas: HTMLCanvasElement = document.getElementById(
   "canvas"
 ) as HTMLCanvasElement;
 
+//STINKY: POOR CONSTANT VAR NAME
 // Set up the game context
 export const ctx: CanvasRenderingContext2D = canvas.getContext(
   "2d"

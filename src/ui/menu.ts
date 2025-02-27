@@ -75,7 +75,7 @@ export const menuActions = (): void => {
   }
   game.newGame();
 };
-
+//STINKY: Unimplemented feature
 const showSettings = (): void => {
   // add settings menu
   throw new Error("Function not implemented.");

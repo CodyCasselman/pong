@@ -4,11 +4,12 @@ import { Player } from "../classes/player";
 import { resetBall } from "../reset";
 import { GameState } from "../types";
 
+//STINKY: LONG METHOD
 function moveBall(
   ball: Ball,
   player1: Player,
   player2: Player,
-  gameState: GameState
+  gameState: GameState //pointless param
 ) {
   // Move the ball
   // Add a random sign to the ball's velocity
@@ -19,7 +20,7 @@ function moveBall(
   if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
     ball.velocityY = -ball.velocityY;
   }
-
+  //STINKY: REPEAT CODE
   // Bounce the ball off the left and right walls, and update scores
   if (ball.x + ball.radius > canvas.width) {
     ball.velocityX = -ball.velocityX;
@@ -34,6 +35,7 @@ function moveBall(
   }
 }
 
+
 const movePaddles = (ball: Ball, player1: Player, player2: Player): void => {
   // Move player1
   movePaddle(player1);
@@ -45,7 +47,7 @@ const movePaddles = (ball: Ball, player1: Player, player2: Player): void => {
     movePaddle(player2);
   }
 };
-
+//STINKY: POOR METHOD NAME
 const movePaddle = (player: Player): void => {
   if (
     player.y + player.velocityY > 0 &&
