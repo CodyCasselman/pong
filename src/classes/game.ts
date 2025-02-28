@@ -11,7 +11,7 @@ import { showGameOverMessage, showScore } from "../drawing/messages";
 import { checkCollisions } from "../engine/collisions";
 import { moveBall, movePaddles } from "../engine/moves";
 import { resetScores, resetBall, resetPaddle } from "../reset";
-import { GameState } from "../types";
+import { GameState, BallAndPlayers } from "../types";
 import { Ball } from "./ball";
 import { Player } from "./player";
 
@@ -103,18 +103,16 @@ export class Game {
       return; // Exit the game loop if the game is over
     }
     clearCanvas();
-    drawElements({
+    
+    const ballAndPlayers: BallAndPlayers = {
       ball: this.ball,
       player1: this.player1,
-      player2: this.player2,
-    });
-    moveBall(this.ball, this.player1, this.player2, this.gameState);
-    movePaddles(this.ball, this.player1, this.player2);
-    checkCollisions({
-      ball: this.ball,
-      player1: this.player1,
-      player2: this.player2,
-    });
+      player2: this.player2
+    };
+    drawElements(ballAndPlayers);
+    moveBall({...ballAndPlayers, gameState: this.gameState});
+    movePaddles(ballAndPlayers);
+    checkCollisions(ballAndPlayers);
     showScore(this.player1.score, this.player2.score);
 
     requestAnimationFrame(this.update.bind(this));

@@ -2,13 +2,10 @@ import { Ball } from "../classes/ball";
 import { AI_LEVEL, canvas } from "../constants";
 import { Player } from "../classes/player";
 import { resetBall } from "../reset";
-import { GameState } from "../types";
+import { BallAndPlayers, GameState } from "../types";
 
 function moveBall(
-  ball: Ball,
-  player1: Player,
-  player2: Player,
-  gameState: GameState
+  {ball, player1, player2, gameState}: BallAndPlayers & {gameState: GameState}
 ) {
   // Move the ball
   // Add a random sign to the ball's velocity
@@ -34,7 +31,7 @@ function moveBall(
   }
 }
 
-const movePaddles = (ball: Ball, player1: Player, player2: Player): void => {
+const movePaddles = ({ball, player1, player2}:  BallAndPlayers): void => {
   // Move player1
   movePaddle(player1);
   // if ai is enabled, move the paddle to the ball

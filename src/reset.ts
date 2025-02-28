@@ -14,6 +14,7 @@ const resetScores = (playersAndWinner: PlayersAndWinner) => {
   winner = null;
 };
 
+
 const resetBall = (ball: Ball): void => {
   // Move the ball to the center of the canvas
   ball.x = canvas.width / 2;
