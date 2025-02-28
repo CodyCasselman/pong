@@ -1,6 +1,7 @@
 import { ctx, canvas, GAME_FONT_FAMILY, DEFAULT_COLOR } from "../constants";
 import { Ball } from "../classes/ball";
-import { BallAndPlayers, Draw, Players } from "../types";
+import { BallAndPlayers, Draw, Players} from "../types";
+import { Player } from "../classes/player";
 
 // Set the canvas width and height to the window width and height
 canvas.width = window.innerWidth;
@@ -40,39 +41,42 @@ const drawPaddles = (players: Players): void => {
   // destructure the args
   let { player1, player2 } = players;
   // draw player1 paddle
-  if (player1) { //STINKY: Unnescesary nested conditional
-    if (player1.width && player1.height && player1.color) { //STINKY: too many conditions. Can be split
-      drawRect({
-        x: player1.x,
-        y: player1.y,
-        width: player1.width,
-        height: player1.height,
-        color: player1.color,
-      });
-    } else { //STINKY: bad error message
-      throw new Error("player1 paddle is missing a required property");
-    }
-  } else {
-    throw new Error("player1 paddle is missing");
-  }
-  //STINKY: repeat code, long method
+  checkPlayerError(player1, "Player 1");
+  drawRect({
+    x: player1.x,
+    y: player1.y,
+    width: player1.width,
+    height: player1.height,
+    color: player1.color,
+  });
+
   // draw player2 paddle
-  if (player2) {
-    if (player2.width && player2.height && player2.color) {
-      drawRect({
-        x: player2.x,
-        y: player2.y,
-        width: player2.width || 0,
-        height: player2.height || 0,
-        color: player2.color || DEFAULT_COLOR,
-      });
-    } else {
-      throw new Error("player2 paddle is missing a required property");
-    }
-  } else {
-    throw new Error("player2 paddle is missing");
-  }
+  checkPlayerError(player2, "Player 2");
+  drawRect({
+    x: player2.x,
+    y: player2.y,
+    width: player2.width || 0,
+    height: player2.height || 0,
+    color: player2.color || DEFAULT_COLOR,
+  });
 };
+
+//REFACTOR:
+const checkPlayerError = (player: Player, playerName: String) => {
+  if(!player){
+    throw new Error(playerName + " paddle is missing.");
+  }
+  if(!player.width){
+    throw new Error(playerName + " is missing the width property");
+  }
+  if(!player.height){
+    throw new Error(playerName + " is missing the height property")
+  }
+  if(!player.color){
+    throw new Error(playerName + " is missing the color property")
+  }
+}
+
 //STINKY: EXCESSIVE AND REDUNDANT COMMENTS
 // Draw a ball on the screen
 const drawBall = (ball: Ball): void => { //STINKY: pointless method

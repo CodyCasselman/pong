@@ -1,7 +1,7 @@
 import { Game } from "./classes/game";
 import { PADDLE_HEIGHT, PADDLE_SPEED } from "./constants";
 import { GameState } from "./types";
-import { drawMenu, menuActions, menuCursorDown, menuCursorUp } from "./ui/menu";
+import { drawMenu, menuActions, moveMenuCursor } from "./ui/menu";
 
 // destructuring the game instance
 const game = Game.getInstance();
@@ -28,37 +28,45 @@ document.addEventListener("click", function (_event: Event) {
 //STINKY: UNCLEAR METHODS AND LONG METHOD
 // Add event listeners for paddle movement
 document.addEventListener("keydown", function (event: KeyboardEvent) {
-  if (event.code === "KeyW") {
-    // Move player1 up
-    game.player1.velocityY = -PADDLE_SPEED;
-  } else if (event.code === "KeyS") {
-    // Move player1 down
-    game.player1.velocityY = PADDLE_SPEED;
-  } else if (event.code === "ArrowUp") {
-    if (game.gameState === GameState.menu) {
-      event.preventDefault();
-      menuCursorUp();
-    }
-    // Move player2 up
-    game.player2.velocityY = -PADDLE_SPEED;
-  } else if (event.code === "ArrowDown") {
-    if (game.gameState === GameState.menu) {
-      event.preventDefault();
-      menuCursorDown();
-    }
-    // Move player2 down
-    game.player2.velocityY = PADDLE_SPEED;
-  } else if (event.code === "Space" && game.gameState === GameState.menu) {
+  handleMovement(event); 
+
+  if (event.code === "Space" && game.gameState === GameState.menu) {
     // Start a new game loop
     game.newGame();
   } else if (event.code === "Escape") {
     // Draw the menu
+    console.log("ESCAPE");
     drawMenu();
   } else if (event.code === "Enter" && game.gameState === GameState.menu) {
     // If the Enter key is pressed in menu, do something based on the selected menu option
     menuActions();
   }
 });
+//REFACTOR
+const handleMovement = (event: KeyboardEvent): void =>{
+  //Moving Player 1
+  if (event.code === "KeyW") {
+    game.player1.velocityY = -PADDLE_SPEED;
+  } else if (event.code === "KeyS") {
+    game.player1.velocityY = PADDLE_SPEED;
+  } 
+  //Moving Player 2
+  else if (event.code === "ArrowUp") {
+    if (game.gameState === GameState.menu) {
+      event.preventDefault();
+      moveMenuCursor("up");
+    }
+    // Move player2 up
+    game.player2.velocityY = -PADDLE_SPEED;
+  } else if (event.code === "ArrowDown") {
+    if (game.gameState === GameState.menu) {
+      event.preventDefault();
+      moveMenuCursor("down");
+    }
+    // Move player2 down
+    game.player2.velocityY = PADDLE_SPEED;
+  }
+}
 
 // Stop the player from moving
 document.addEventListener("keyup", function (event: KeyboardEvent) {

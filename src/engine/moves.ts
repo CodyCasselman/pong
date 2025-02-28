@@ -9,7 +9,7 @@ function moveBall(
   ball: Ball,
   player1: Player,
   player2: Player,
-  gameState: GameState //pointless param
+  gameState: GameState
 ) {
   // Move the ball
   // Add a random sign to the ball's velocity
@@ -20,19 +20,21 @@ function moveBall(
   if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
     ball.velocityY = -ball.velocityY;
   }
-  //STINKY: REPEAT CODE
   // Bounce the ball off the left and right walls, and update scores
   if (ball.x + ball.radius > canvas.width) {
-    ball.velocityX = -ball.velocityX;
-    player1.score++;
-    gameState = GameState.score;
-    resetBall(ball);
+    recordScore(ball, player1, gameState);
   } else if (ball.x - ball.radius < 0) {
+    recordScore(ball, player2, gameState)
+  }
+}
+
+//REFACTOR:
+const recordScore = (ball: Ball, player: Player, gameState: GameState): void => {
+    //Bounce the ball off of the wall, update the scoring players score
     ball.velocityX = -ball.velocityX;
-    player2.score++;
+    player.score++;
     gameState = GameState.score;
     resetBall(ball);
-  }
 }
 
 
@@ -47,6 +49,7 @@ const movePaddles = (ball: Ball, player1: Player, player2: Player): void => {
     movePaddle(player2);
   }
 };
+
 //STINKY: POOR METHOD NAME
 const movePaddle = (player: Player): void => {
   if (
