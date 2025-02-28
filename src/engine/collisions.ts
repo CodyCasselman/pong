@@ -54,24 +54,19 @@ const isCollision = (ballAndPlayer: BallAndPlayer): boolean => {
   const playerBottom = player.y + player.height;
   const playerLeft = player.x;
   const playerRight = player.x + player.width;
+  //REFACTOR
+  // Check if ball is between player edges
+  let ballPastEdge = ballRight > playerLeft && 
+    ballLeft < playerRight &&
+    ballBottom > playerTop &&
+    ballTop < playerBottom;
 
-  // Check if ball edges are past player edges
-  const isBallRightEdgePastPlayerLeftEdge: boolean = ballRight > playerLeft; // ball right edge past player left edge
-  const isBallLeftEdgePastPlayerRightEdge: boolean = ballLeft < playerRight; // ball left edge past player right edge
-  const isBallBottomEdgePastPlayerTopEdge: boolean = ballBottom > playerTop; // ball bottom edge past player top edge
-  const isBallTopEdgePastPlayerBottomEdge: boolean = ballTop < playerBottom; // ball top edge past player bottom edge
+  // Check if ball is not in a corner
+  let ballPastPlayer = ball.x > player.x &&
+    ball.x < player.x + player.width;
 
-  // Check if ball is between player edges and not in the corners
-  // If ball is in the corners, it's not a collision
-  // This is a little hacky, but it's a good start
-  //WAYYYY TOO BIG OF A BOOLEAN
   return (
-    isBallRightEdgePastPlayerLeftEdge &&
-    isBallLeftEdgePastPlayerRightEdge &&
-    isBallBottomEdgePastPlayerTopEdge &&
-    isBallTopEdgePastPlayerBottomEdge &&
-    ball.x > player.x &&
-    ball.x < player.x + player.width
+    ballPastEdge && ballPastPlayer
   );
 };
 

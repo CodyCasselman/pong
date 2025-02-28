@@ -5,7 +5,7 @@ import { drawText } from "../drawing/draw";
 const game = Game.getInstance();
 
 // Define the menu options
-const menuOptions = ["1 Player ", "2 Players"]; //, "Settings"];
+const menuOptions = ["1 Player ", "2 Players"]; //, "Settings"]; //STINKY: Commented out code
 
 // Define the selected menu index (starting from zero)
 let selectedMenuIndex = 0;
@@ -55,17 +55,7 @@ export const drawMenu = (): void => {
   drawTitle();
   drawMenuOptions();
 };
-//STINKY: repeat code
-export const menuCursorDown = (): void => {
-  selectedMenuIndex = (selectedMenuIndex + 1) % menuOptions.length;
-  drawMenu();
-};
 
-export const menuCursorUp = (): void => {
-  selectedMenuIndex =
-    (selectedMenuIndex - 1 + menuOptions.length) % menuOptions.length;
-  drawMenu();
-};
 //REFACTOR
 export const moveMenuCursor = (direction: string) : void => {
   let directionModifier = (direction === "up"? 1 : menuOptions.length - 1 );

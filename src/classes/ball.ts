@@ -1,3 +1,5 @@
+import { BALL_RADIUS } from "../constants";
+
 export class Ball {
   private _x: number;
   private _y: number;
@@ -21,7 +23,7 @@ export class Ball {
     this._velocityY = velocityY;
     this._speed = speed;
     this._color = color;
-    this._radius = 10; //MAGIC NUMBER
+    this._radius = BALL_RADIUS; //MAGIC NUMBER
   }
 
   // Getters and setters

@@ -6,22 +6,27 @@ import { Player } from "../classes/player";
 // Set the canvas width and height to the window width and height
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+//MAGIC NUMBER REFACTOR
+const BORDER_THICKNESS = 5;
+const BORDER_COLOR = "rgba(170, 170, 170, 1)";
 
 const drawBorder = (): void => {
   // Draw a border around the canvas
-  let borderThickness = 5;
-  let borderColor = "rgba(170, 170, 170, 1)";
-  ctx.lineWidth = borderThickness;
-  ctx.strokeStyle = borderColor;
+  ctx.lineWidth = BORDER_THICKNESS;
+  ctx.strokeStyle = BORDER_COLOR;
   ctx.strokeRect(0, 0, canvas.width, canvas.height);
 };
+
+//REFACTOR: MAGIC NUMBERS
+const NET_WIDTH = 10;
+const NET_HEIGHT = 15;
 
 //draws the net
 const drawNet = (): void => {
   //net width
-  const width = 10;//STINKY: MAGIC NUMBERS
+  const width = NET_WIDTH;
   //net height
-  const height = 15;
+  const height = NET_HEIGHT;
   //net x coordinate
   const x = canvas.width / 2;
   //net y coordinate

@@ -11,7 +11,7 @@ import { showGameOverMessage, showScore } from "../drawing/messages";
 import { checkCollisions } from "../engine/collisions";
 import { moveBall, movePaddles } from "../engine/moves";
 import { resetScores, resetBall, resetPaddle } from "../reset";
-import { GameState } from "../types";
+import { GameState, BallAndPlayers } from "../types";
 import { Ball } from "./ball";
 import { Player } from "./player";
 
@@ -79,7 +79,6 @@ export class Game {
   }
 
   newGame() {
-    //STINKY: POINTLESS BOOLEAN
     if (
       this.gameState === GameState.menu ||
       this.gameState === GameState.gameOver
@@ -98,14 +97,14 @@ export class Game {
 
   //UPDATE DOES TOO MUCH
   update() {
-    this.gameOver(); //LACK OF COMMENTS
+    this.gameOver();
     if (this.gameState === "gameOver") {
       showGameOverMessage(this.winner as Player);
       this.gameState = GameState.menu;
       return; // Exit the game loop if the game is over
     }
     clearCanvas();
-    drawElements({ //STINKY: TOO MANY PARAMETERS. CAN BE TURNED INTO OBJECTS
+    drawElements({
       ball: this.ball,
       player1: this.player1,
       player2: this.player2,
@@ -121,18 +120,16 @@ export class Game {
 
     requestAnimationFrame(this.update.bind(this));
   }
-  //UNCLEAR METHOD NAME AND FUNCTION
+  //REFACTOR
   gameOver() {
+    //Checks if either player has won, if they have set the game state to gameOver and set the winnder
     if (
-      //STINKY
-      this.player1.score === WINNING_SCORE ||
-      this.player2.score === WINNING_SCORE
+      this.player1.score !== WINNING_SCORE &&
+      this.player2.score !== WINNING_SCORE
     ) {
-      
-      this.gameState = GameState.gameOver;
-      //STINKY
-      this.winner =
-        this.player1.score > this.player2.score ? this.player1 : this.player2;
+      return;
     }
+      this.gameState = GameState.gameOver;
+      this.winner = this.player1.score > this.player2.score ? this.player1 : this.player2;   
   }
 }
