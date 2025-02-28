@@ -19,16 +19,18 @@ function moveBall(
 
   // Bounce the ball off the left and right walls, and update scores
   if (ball.x + ball.radius > canvas.width) {
-    ball.velocityX = -ball.velocityX;
-    player1.score++;
-    gameState = GameState.score;
-    resetBall(ball);
+    recordScore(ball, player1, gameState);
   } else if (ball.x - ball.radius < 0) {
+    recordScore(ball, player2, gameState)
+  }
+}
+
+const recordScore = (ball: Ball, player: Player, gameState: GameState): void => {
+    //Bounce the ball off of the wall, update the scoring players score
     ball.velocityX = -ball.velocityX;
-    player2.score++;
+    player.score++;
     gameState = GameState.score;
     resetBall(ball);
-  }
 }
 
 const movePaddles = ({ball, player1, player2}:  BallAndPlayers): void => {
