@@ -56,16 +56,12 @@ export const drawMenu = (): void => {
   drawMenuOptions();
 };
 
-export const menuCursorDown = (): void => {
-  selectedMenuIndex = (selectedMenuIndex + 1) % menuOptions.length;
+//REFACTOR
+export const moveMenuCursor = (direction: string) : void => {
+  let directionModifier = (direction === "up"? 1 : menuOptions.length - 1 );
+  selectedMenuIndex = selectedMenuIndex + directionModifier % menuOptions.length;
   drawMenu();
-};
-
-export const menuCursorUp = (): void => {
-  selectedMenuIndex =
-    (selectedMenuIndex - 1 + menuOptions.length) % menuOptions.length;
-  drawMenu();
-};
+}
 
 export const menuActions = (): void => {
   if (selectedMenuIndex === 0) {
