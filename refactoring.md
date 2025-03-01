@@ -143,7 +143,7 @@ const movePaddle = (player: Player): void => {
 };
 ```
 
-**draw.ts, lines 44-74**
+**event.ts, lines 33-44**
 **Before**
 ```typescript
 
