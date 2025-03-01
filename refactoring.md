@@ -146,11 +146,44 @@ const movePaddle = (player: Player): void => {
 **event.ts, lines 33-44**
 **Before**
 ```typescript
-
+if (event.code === "KeyW") {
+    // Move player1 up
+    game.player1.velocityY = -PADDLE_SPEED;
+  } else if (event.code === "KeyS") {
+    // Move player1 down
+    game.player1.velocityY = PADDLE_SPEED;
+  } else if (event.code === "ArrowUp") {
+    if (game.gameState === GameState.menu) {
+      event.preventDefault();
+      menuCursorUp();
+    }
+    // Move player2 up
+    game.player2.velocityY = -PADDLE_SPEED;
+  } else if (event.code === "ArrowDown") {
+    if (game.gameState === GameState.menu) {
+      event.preventDefault();
+      menuCursorDown();
+    }
+    // Move player2 down
+    game.player2.velocityY = PADDLE_SPEED;
 ```
 **After**
 ```typescript
-
+if(game.gameState === GameState.menu){
+    if (event.code === "Space") {
+      // Start a new game loop
+      game.newGame();
+    } 
+    else if (event.code === "Enter") {
+      // If the Enter key is pressed in menu, do something based on the selected menu option
+      menuActions();
+    }
+  }
+  else if (event.code === "Escape") {
+    // Draw the menu
+    console.log("ESCAPE");
+    drawMenu();
+  }
 ```
 
 ### Frequently Grouped Variables:
