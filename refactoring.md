@@ -446,6 +446,24 @@ const movePlayer = (player: Player, speed: number): void => {
 **draw.ts lines 53-56, 70-73, 193-206**
 **Before**
 ```typescript
+  // draw player1 paddle
+  if (player1) {
+    if (player1.width && player1.height && player1.color) {
+      drawRect({
+        x: player1.x,
+        y: player1.y,
+        width: player1.width,
+        height: player1.height,
+        color: player1.color,
+      });
+    } else {
+      throw new Error("player1 paddle is missing a required property");
+    }
+  } else {
+    throw new Error("player1 paddle is missing");
+  }
+--------
+
 
 ```
 **After**
