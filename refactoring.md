@@ -462,9 +462,22 @@ const movePlayer = (player: Player, speed: number): void => {
   } else {
     throw new Error("player1 paddle is missing");
   }
---------
-
-
+  // draw player2 paddle
+  if (player2) {
+    if (player2.width && player2.height && player2.color) {
+      drawRect({
+        x: player2.x,
+        y: player2.y,
+        width: player2.width || 0,
+        height: player2.height || 0,
+        color: player2.color || DEFAULT_COLOR,
+      });
+    } else {
+      throw new Error("player2 paddle is missing a required property");
+    }
+  } else {
+    throw new Error("player2 paddle is missing");
+  }
 ```
 **After**
 ```typescript
