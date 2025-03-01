@@ -177,10 +177,48 @@ if(game.gameState === GameState.menu){
 ```
 
 ### Frequently Grouped Variables:
+**game.ts lines 106-117**
+**Before**
+```typescript
 
+```
+**After**
+```typescript
+```
 ## Routine Level Refactors
 ### Method is Too Long
+**moves.ts lines 8-36**
+**Before**
+```typescript
+```
+**After**
+```typescript
+```
+
+**draw.ts, lines 44-76**
+**Before**
+```typescript
+```
+**After**
+```typescript
+```
+
+**event.ts lines 28-61**
+**Before**
+```typescript
+```
+**After**
+```typescript
+```
+
 ### Confusing or Incomplete Error Messages
+**draw.ts lines 53-56, 70-73, 193-206**
+**Before**
+```typescript
+```
+**After**
+```typescript
+```
 
 ## Class or System Level Refactors:
 ### Architecture Issue
