@@ -446,6 +446,7 @@ const movePlayer = (player: Player, speed: number): void => {
 **draw.ts lines 53-56, 70-73, 193-206**
 **Before**
 ```typescript
+
 ```
 **After**
 ```typescript
