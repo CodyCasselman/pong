@@ -358,13 +358,88 @@ const checkPlayerError = (player: Player, playerName: String) => {
 }
 ```
 
-**event.ts lines 28-61**
+**event.ts lines 29-61**
 **Before**
 ```typescript
-
+// Add event listeners for paddle movement
+document.addEventListener("keydown", function (event: KeyboardEvent) {
+  if (event.code === "KeyW") {
+    // Move player1 up
+    game.player1.velocityY = -PADDLE_SPEED;
+  } else if (event.code === "KeyS") {
+    // Move player1 down
+    game.player1.velocityY = PADDLE_SPEED;
+  } else if (event.code === "ArrowUp") {
+    if (game.gameState === GameState.menu) {
+      event.preventDefault();
+      menuCursorUp();
+    }
+    // Move player2 up
+    game.player2.velocityY = -PADDLE_SPEED;
+  } else if (event.code === "ArrowDown") {
+    if (game.gameState === GameState.menu) {
+      event.preventDefault();
+      menuCursorDown();
+    }
+    // Move player2 down
+    game.player2.velocityY = PADDLE_SPEED;
+  } else if (event.code === "Space" && game.gameState === GameState.menu) {
+    // Start a new game loop
+    game.newGame();
+  } else if (event.code === "Escape") {
+    // Draw the menu
+    drawMenu();
+  } else if (event.code === "Enter" && game.gameState === GameState.menu) {
+    // If the Enter key is pressed in menu, do something based on the selected menu option
+    menuActions();
+  }
+});
 ```
 **After**
 ```typescript
+document.addEventListener("keydown", function (event: KeyboardEvent) {
+  handleMovement(event); 
+
+  if(game.gameState === GameState.menu){
+    if (event.code === "Space") {
+      // Start a new game loop
+      game.newGame();
+    } 
+    else if (event.code === "Enter") {
+      // If the Enter key is pressed in menu, do something based on the selected menu option
+      menuActions();
+    }
+  }
+  else if (event.code === "Escape") {
+    // Draw the menu
+    console.log("ESCAPE");
+    drawMenu();
+  } 
+  
+});
+
+//REFACTOR
+const handleMovement = (event: KeyboardEvent): void =>{
+  //Handling Key Input
+  if (event.code === "KeyW" || event.code ==="KeyS") {
+    let paddleOneSpeed = (event.code === "KeyW" ? -PADDLE_SPEED : PADDLE_SPEED);
+    movePlayer(game.player1, paddleOneSpeed);
+  }
+  //Handling arrow input
+  else if (event.code === "ArrowUp" || event.code === "ArrowDown") {
+    let direction: string = (event.code === "ArrowUp" ? "up" : "down");
+    let paddleTwoSpeed: number = (event.code === "ArrowUp" ? -PADDLE_SPEED : PADDLE_SPEED);
+    if(game.gameState === GameState.menu){
+      event.preventDefault
+      moveMenuCursor(direction)
+    }
+    movePlayer(game.player2, paddleTwoSpeed);
+  }
+}
+
+const movePlayer = (player: Player, speed: number): void => {
+  player.velocityY = speed;
+}
 ```
 
 ### Confusing or Incomplete Error Messages
