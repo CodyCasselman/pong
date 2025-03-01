@@ -121,11 +121,26 @@ const checkPlayerError = (player: Player, playerName: String) => {
 **moves.ts, lines 48-55**
 **Before**
 ```typescript
-
+const movePaddle = (player: Player): void => {
+  if (
+    player.y + player.velocityY > 0 &&
+    player.y + player.height + player.velocityY < canvas.height
+  ) {
+    player.y += player.velocityY;
+  }
+};
 ```
 **After**
 ```typescript
-
+const movePaddle = (player: Player): void => {
+  let deltaPlayer = player.y + player.velocityY;
+  if (
+    deltaPlayer > 0 &&
+    deltaPlayer + player.height < canvas.height
+  ) {
+    player.y = deltaPlayer;
+  }
+};
 ```
 
 **draw.ts, lines 44-74**
