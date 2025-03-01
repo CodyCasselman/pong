@@ -1,7 +1,11 @@
 # Refactoring
-# Data and Statement Level Refactors
-## Code Smell: Incorrect Conditions in Loops and Conditionals:
-### collisions.ts, lines 68-76
+**What do we find critical?**
+
+To identify which code smells could be considered critical, we considered and weighed their impact to maintainability, their frequency, and their overall impact on the program at whole. One serious consideration is that we found the program to be incredibly difficult to decipher. Therefore, we prioritized code smells such as long methods, incorrect conditions, and incomplete error messages in order to address the readability issue within the code. We also considered refactoring the program to alleviate its issue with repeated code, but decided that focusing on long methods also addressed the repeated code.
+
+## Data and Statement Level Refactors
+### Code Smell: Incorrect Conditions in Loops and Conditionals:
+#### collisions.ts, lines 68-76
 **Before**
 ```typescript
 // Check if ball edges are past player edges
@@ -38,7 +42,7 @@
     ballPastEdge && ballPastPlayer
   );
 ```
-### draw.ts, lines 44-74
+#### draw.ts, lines 44-74
 **Before**
 ```typescript
 //draw the paddles
@@ -122,7 +126,7 @@ const checkPlayerError = (player: Player, playerName: String) => {
 This refactor focused particularly on nested conditionals that occur in the error checking present in the above code. By having complicated conditions, the developer made it difficult to identify what the error is catching. By having multiple nested conditionals, the developer made it difficult to modify, and difficult to read.
 My refactor took each value that was checked and placed them in their own conditionals. This created a "gate" which the program had to pass. This way, it was much easier to identify where the actual error would be coming from.
 
-### moves.ts, lines 48-55
+#### moves.ts, lines 48-55
 **Before**
 ```typescript
 const movePaddle = (player: Player): void => {
@@ -150,7 +154,7 @@ const movePaddle = (player: Player): void => {
 
 This refactor focused on improving clarity by removing multiple and repeated operations from conditional statements. By extracting the statement `player.y + player.velocityY` into its own variable; `deltaPlayer`, I avoided needing to repeat writing the same code multiple times. This allows for a more clear boolean, allowing other developers to better understand how the program is working.
 
-### event.ts, lines 33-44
+#### event.ts, lines 33-44
 **Before**
 ```typescript
 else if (event.code === "Space" && game.gameState === GameState.menu) {
@@ -186,8 +190,8 @@ if(game.gameState === GameState.menu){
 
 The above code suffered from a redundant conditional. In the version pre-refactoring, the developer checks whether the `game.gameState === GameState.menu` multiple times. This was avoided in the refactor by checking whether the game was in the menu state first, and then nesting additional logic inside of that boolean. While nested booleans are generally not preferred, this one has a low depth and allows for more concise, clear code.
 
-## Frequently Grouped Variables:
-### game.ts lines 106-117
+### Frequently Grouped Variables:
+#### game.ts lines 106-117
 **Before**
 ```typescript
 drawElements({
@@ -220,7 +224,7 @@ drawElements({
 In a number of statements, the same variables are input functions which all require the same arguments. This looks cluttered, and can allow for information to be difficult to parse. In my refactor, I utilized the already created type BallAndPlayers to group the arguments together, and allow the inputted arguments to be much more concise. By utilizing custom objects, we are able to make our code more readable and modular.
 ## Routine Level Refactors
 ### Method is Too Long
-### moves.ts lines 7-35
+#### moves.ts lines 7-35
 **Before**
 ```typescript
 function moveBall(
@@ -288,7 +292,7 @@ const recordScore = (ball: Ball, player: Player, gameState: GameState): void => 
 
 The above code repeats the same statements multiple times. This makes the program look more complicated than it is, and as a result makes it more difficult to understand. To remedy this issue, we used the extract method refactor, and this allowed us to group similar operations together, reducing the visual length of the method. By doing this, we improved the readability of the program, and make it so that if the program needs to change, they can be made in fewer places.
 
-### draw.ts, lines 38-76
+#### draw.ts, lines 38-76
 **Before**
 ```typescript
 // Draw the paddles.
@@ -377,7 +381,7 @@ const checkPlayerError = (player: Player, playerName: String) => {
 
 In this refactor, we focused on reducing the length of the above method, by extracting repeated code and making it more modular. This allows us to more easily understand what the program is doing, as rather than a single method performing every operation, we have smaller methods that can perform few operations. This allows them to be used in more areas. The refactor provides modular, readable code.
 
-### event.ts lines 29-61
+#### event.ts lines 29-61
 **Before**
 ```typescript
 // Add event listeners for paddle movement
@@ -465,8 +469,8 @@ const movePlayer = (player: Player, speed: number): void => {
 
 In this refactor, we again use the extract method to extract smaller operations occuring within our main operation. This allows those smaller operations to be clearer as to what they're acheiving. The key event is still processing key events, but now the method handleMovement is handling the event for player movement, and handleMenu is handling the event for menu inputs. By making methods shorter and clearer in what they're attempting to do, we increase the readability and adaptability of our code.
 
-## Confusing or Incomplete Error Messages
-### draw.ts lines 38-76, 184-197
+### Confusing or Incomplete Error Messages
+#### draw.ts lines 38-76, 184-197
 **Before**
 ```typescript
   // draw player1 paddle
