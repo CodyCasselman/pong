@@ -192,8 +192,7 @@ const clearCanvas = (): void => {
   try {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   } catch (e) {
-    // We could do something with the error, but we are not interested in it
-    // for now. This method is not critical, so we can just ignore it.
+    throw new Error("Unable to clear canvas");
   }
 };
 
