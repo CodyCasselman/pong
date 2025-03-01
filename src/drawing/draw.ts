@@ -61,7 +61,6 @@ const drawPaddles = (players: Players): void => {
   });
 };
 
-//REFACTOR:
 const checkPlayerError = (player: Player, playerName: String) => {
   if(!player){
     throw new Error(playerName + " paddle is missing.");
