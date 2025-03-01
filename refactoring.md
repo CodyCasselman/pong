@@ -118,17 +118,7 @@ const checkPlayerError = (player: Player, playerName: String) => {
 }
 ```
 
-**game.ts, lines 124-136**
-**Before**
-```typescript
-
-```
-**After**
-```typescript
-
-```
-
-**draw.ts, lines 44-74**
+**moves.ts, lines 48-55**
 **Before**
 ```typescript
 
