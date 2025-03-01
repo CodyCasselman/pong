@@ -46,11 +46,12 @@ const movePaddles = ({ball, player1, player2}:  BallAndPlayers): void => {
 };
 
 const movePaddle = (player: Player): void => {
+  let deltaPlayer = player.y + player.velocityY;
   if (
-    player.y + player.velocityY > 0 &&
-    player.y + player.height + player.velocityY < canvas.height
+    deltaPlayer > 0 &&
+    deltaPlayer + player.height < canvas.height
   ) {
-    player.y += player.velocityY;
+    player.y = deltaPlayer;
   }
 };
 
