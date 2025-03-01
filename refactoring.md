@@ -180,16 +180,37 @@ if(game.gameState === GameState.menu){
 **game.ts lines 106-117**
 **Before**
 ```typescript
-
+drawElements({
+      ball: this.ball,
+      player1: this.player1,
+      player2: this.player2,
+    });
+    moveBall(this.ball, this.player1, this.player2, this.gameState);
+    movePaddles(this.ball, this.player1, this.player2);
+    checkCollisions({
+      ball: this.ball,
+      player1: this.player1,
+      player2: this.player2,
+    });
 ```
 **After**
 ```typescript
+    const ballAndPlayers: BallAndPlayers = {
+      ball: this.ball,
+      player1: this.player1,
+      player2: this.player2
+    };
+    drawElements(ballAndPlayers);
+    moveBall({...ballAndPlayers, gameState: this.gameState});
+    movePaddles(ballAndPlayers);
+    checkCollisions(ballAndPlayers);
 ```
 ## Routine Level Refactors
 ### Method is Too Long
 **moves.ts lines 8-36**
 **Before**
 ```typescript
+
 ```
 **After**
 ```typescript
